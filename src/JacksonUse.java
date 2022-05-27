@@ -1,42 +1,28 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 
 public class JacksonUse {
-    public House deserializePerson(String json) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode root = (ObjectNode) mapper.readTree(json);
-
-        String houseNumber = root.path("houseNumber").asText();
-        String address = root.path("address").asText();
-
-
-        return new House(houseNumber, address, null, null);
+    public static House deserializePerson(String json) throws IOException {
+        return new ObjectMapper().readValue(json, House.class);
     }
 
     public static String serializePerson(House house) throws IOException {
-
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNodeFactory nodeFactory = mapper.getNodeFactory();
-        ObjectNode root = nodeFactory.objectNode();
-
-        root.put("houseNumber", house.getHouseNumber());
-        root.put("address", house.getAddress());
-
-
-        Writer writer = new StringWriter();
-        mapper.writeValue(writer, root);
-
-        return writer.toString();
+        return new ObjectMapper().writeValueAsString(house);
     }
 
     public static void main(String[] args) throws IOException {
-        var data = new ArrayList<Flat>();
-        System.out.println(serializePerson(new House("110", "address", new Person("a", "b", "c"), data)));
+        var flatList = new ArrayList<Flat>();
+        var personList = new ArrayList<Person>();
+        personList.add(new Person("a1", "b1", "c1"));
+        personList.add(new Person("a2", "b2", "c2"));
+
+        flatList.add(new Flat(1,2.5, personList));
+        var obj = new House("110", "address", new Person("a", "b", "c"), flatList);
+        var json = serializePerson(obj);
+        var newObj = deserializePerson(json);
+
+        System.out.println(newObj);
     }
 }

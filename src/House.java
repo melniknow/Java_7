@@ -6,17 +6,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class House implements Serializable {
-    @JsonProperty(value = "houseNumber")
     String houseNumber;
-    @JsonProperty(value = "address")
     String address;
-    @JsonProperty(value = "mainPerson")
     Person mainPerson;
-    @JsonProperty(value = "flatList")
     ArrayList<Flat> flatList;
 
     @JsonCreator
-    public House(String houseNumber, String address, Person mainPerson, ArrayList<Flat> flatList) {
+    public House(@JsonProperty(value = "houseNumber") String houseNumber, @JsonProperty(value = "address") String address, @JsonProperty(value = "mainPerson") Person mainPerson, @JsonProperty(value = "flatList") ArrayList<Flat> flatList) {
         this.houseNumber = houseNumber;
         this.address = address;
         this.mainPerson = mainPerson;
@@ -71,10 +67,10 @@ public class House implements Serializable {
     @Override
     public String toString() {
         return "House{" +
-                "houseNumber='" + houseNumber + '\'' +
-                ", address='" + address + '\'' +
-                ", mainPerson=" + mainPerson +
-                ", flatList=" + flatList +
-                '}';
+            "houseNumber='" + houseNumber + '\'' +
+            ", address='" + address + '\'' +
+            ", mainPerson=" + mainPerson +
+            ", flatList=" + flatList +
+            '}';
     }
 }

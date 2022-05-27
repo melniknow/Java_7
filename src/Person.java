@@ -1,20 +1,16 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Person implements Serializable {
-    @JsonProperty(value = "name")
     String name;
-    @JsonProperty(value = "lastName")
     String lastName;
-    @JsonProperty(value = "patronymic")
     String patronymic;
 
     @JsonCreator
-    public Person(String name, String lastName, String patronymic) {
+    public Person(@JsonProperty(value = "name") String name, @JsonProperty(value = "lastName") String lastName, @JsonProperty(value = "patronymic") String patronymic) {
         this.name = name;
         this.lastName = lastName;
         this.patronymic = patronymic;
@@ -60,9 +56,9 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                '}';
+            "name='" + name + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", patronymic='" + patronymic + '\'' +
+            '}';
     }
 }

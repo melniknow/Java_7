@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Flat implements Serializable {
-    @JsonProperty(value = "number")
     int number;
-    @JsonProperty(value = "square")
     double square;
-    @JsonProperty(value = "name")
     ArrayList<Person> personList;
 
-    public Flat(int number, double square, ArrayList<Person> personList) {
+    public Flat(@JsonProperty(value = "number") int number, @JsonProperty(value = "square") double square, @JsonProperty(value = "name") ArrayList<Person> personList) {
         this.number = number;
         this.square = square;
         this.personList = personList;
@@ -58,9 +55,9 @@ public class Flat implements Serializable {
     @Override
     public String toString() {
         return "Flat{" +
-                "number=" + number +
-                ", square=" + square +
-                ", personList=" + personList +
-                '}';
+            "number=" + number +
+            ", square=" + square +
+            ", personList=" + personList +
+            '}';
     }
 }
