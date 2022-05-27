@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HouseService {
     public static void serializeHouse(House house, String filename) {
@@ -21,7 +22,7 @@ public class HouseService {
 
     public static void main(String[] args) {
         var data = new ArrayList<Flat>();
-        serializeHouse(new House("110", "address", new Person("a", "b", "c"), data), "house.data");
+        serializeHouse(new House("110", "address", new Person("a", "b", "c", new Date()), data), "house.data");
         System.out.println(deserializeHouse("house.data"));
     }
 }
